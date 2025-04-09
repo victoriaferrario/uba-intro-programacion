@@ -1,8 +1,23 @@
--- cd guia_3 
--- ghci 
------ :l nombre de file con .hs
------ :q quit salir de ghci
------ se prueba con el nombre de la función + input 
+
+
+-- revisar ejercicio 7
+
+-- $ pwd : muestra dir en el que estoy
+-- $ ls : muestra carpetas dentro de dir actual
+-- $ cd : cambia dir actual
+-- $ ghci : ejecuta ghci (para ejecutar haskell)
+-- $ :l miArchivo.hs : carga archivo
+-- $ :r : reloadea archivo (usar luego de cambios)
+-- $ :q : salir
+
+{--
+comentario multilinea 
+--}
+
+
+-- Renombre de tipos
+type Punto2D = (Float, Float)
+type Punto3D = (Float, Float, Float) 
 
 
 
@@ -15,9 +30,9 @@ f n | n == 1 = 8
 
 -- sin pattern matching
 fAlt :: Integer -> Integer
-f 1 = 0 
-f 4 = 131
-f 16 = 15
+fAlt 1 = 0 
+fAlt 4 = 131
+fAlt 16 = 15
 
 -- b)
 g :: Integer -> Integer 
@@ -38,15 +53,15 @@ k n = g x
 -- EJERCICIO 2 -----------------------------------------
 -- a) Valor absoluto
 -- Importante: en terminal usar paréntesis (-n)
-abs :: Integer -> Integer 
-abs n   | n < 0 = -n
+valAbs:: Integer -> Integer 
+valAbs n| n < 0 = -n
         | otherwise = n
 
 -- b) maximo Absoluto, devuelve el máximo de valor absoluto entre 2
 maxAbsoluto :: Integer -> Integer -> Integer
 maxAbsoluto x y
-    | absolute x > absolute y = absolute x
-    | otherwise = absolute y
+    | valAbs x > valAbs y = valAbs x
+    | otherwise = valAbs y
 
 -- c) maximo 3
 max3 :: Integer -> Integer -> Integer -> Integer
@@ -118,11 +133,10 @@ digitoDecenas x
     | otherwise = 0
 
 
-ype Punto2D = (Float, Float)
 
--- Ejercicio 4. ⋆ Especificar e implementar las siguientes funciones utilizando tuplas para representar pares y ternas de
+-- EJERCICIO 4 -----------------------------------------
+-- Especificar e implementar las siguientes funciones utilizando tuplas para representar pares y ternas de
 -- n´umeros.
-
 -- a) productoInterno: calcula el producto interno entre dos tuplas de R × R.
 
 productoInterno :: Punto2D -> Punto2D -> Float
@@ -136,9 +150,6 @@ esParmenor a b = fst a  < fst b && snd a < snd b
 ------ Modulo de la resta entre los vectores
 distancia :: Punto2D -> Punto2D -> Float
 distancia a b = sqrt((fst a - fst b)**2 + (snd a- snd b)**2)
-
-
--- pwd donde esta ls todo cd abre carpeta
 
 -- d) sumaTerna: dada una terna de enteros, calcula la suma de sus tres elementos.
 sumaTerna :: (Integer, Integer, Integer) -> Integer
@@ -186,21 +197,20 @@ invertir (a,b) = (b,a)
 -- type Punto2D = (Float, Float)
 
 
-
--- Ejercicio 5. Implementar la funci´on todosMenores :: (Integer, Integer, Integer) -> Bool
-f :: Integer -> Integer 
-f n | n <= 7 = n * n 
+-- EJERCICIO 5 -----------------------------------------
+-- Implementar la funci´on todosMenores :: (Integer, Integer, Integer) -> Bool
+fT :: Integer -> Integer 
+fT n | n <= 7 = n * n 
     | n > 7 = 2*n - 1
 
-g :: Integer -> Integer 
-g n | esMultiploDe n 2 = div n 2
+gT :: Integer -> Integer 
+gT n | esMultiploDe n 2 = div n 2
     | otherwise = 3*n + 1
 
 todosMenores :: (Integer, Integer, Integer) -> Bool
-todosMenores (x,y,z) = (f x > g x) && (f y > g y) && (f z > g z)
+todosMenores (x,y,z) = (fT x > gT x) && (fT y > gT y) && (fT z > gT z)
 
--- Ejercicio 6. 
-
+-- EJERCICIO 6 -----------------------------------------
 type Anio = Integer
 type EsBisiesto = Bool
 
@@ -209,21 +219,20 @@ bisiesto a = not(not(esMultiploDe a 4) || (esMultiploDe a 100  && not(esMultiplo
 -- el not al principio --> la especificacion define res = false 
 
 
--- Ejercicio 7.
--- a) Implementar la funci´on:
--- distanciaManhattan:: (Float, Float, Float) -> (Float, Float, Float) -> Float
--- problema distanciaManhattan (p : R × R × R, q : R × R × R) : R {
--- requiere: {T rue}
--- asegura: {res = P2
--- i=0 |pi − qi|}
--- }
--- Por ejemplo:
--- distanciaManhattan (2, 3, 4) (7, 3, 8) ⇝ 9
--- distanciaManhattan ((-1), 0, (-8.5)) (3.3, 4, (-4)) ⇝ 12.8
+-- EJERCICIO 7 -----------------------------------------
+{--
+distanciaManhattan :: Punto3D -> Punto3D -> Float
+distanciaManhattan (a,b,c) (d,e,j) = (valAbs (truncate(a-d)) + valAbs (truncate(b-e)) + valAbs (truncate(c-j)))
+--}
 
-distanciaManhattan :: (Float, Float, Float) -> (Float, Float, Float) -> Float
-distanciaManhattan (a,b,c) (d,e,f) = (abs (a-d) + abs(b-e) + abs(c-f))
+-- EJERCICIO 8 -----------------------------------------
+
+comparar :: Integer -> Integer -> Integer
+comparar a b
+    | sumaUltimosDosDigitos(a) < sumaUltimosDosDigitos(b) = 1
+    | sumaUltimosDosDigitos(a) > sumaUltimosDosDigitos(b) = -1
+    | sumaUltimosDosDigitos(a) == sumaUltimosDosDigitos(b) = 0
 
 
--- b) Reimplementar la funci´on teniendo en cuenta el siguiente tipo: type Punto3D = (Float, Float, Float)
-
+sumaUltimosDosDigitos :: Integer -> Integer
+sumaUltimosDosDigitos x = mod (valAbs x) 10 + mod (div (valAbs x) 10) 10 
