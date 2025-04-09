@@ -220,10 +220,9 @@ bisiesto a = not(not(esMultiploDe a 4) || (esMultiploDe a 100  && not(esMultiplo
 
 
 -- EJERCICIO 7 -----------------------------------------
-{--
+
 distanciaManhattan :: Punto3D -> Punto3D -> Float
-distanciaManhattan (a,b,c) (d,e,j) = (valAbs (truncate(a-d)) + valAbs (truncate(b-e)) + valAbs (truncate(c-j)))
---}
+distanciaManhattan (a,b,c) (d,e,j) = ( abs (a - d) + abs (b - e) + abs (c-j))
 
 -- EJERCICIO 8 -----------------------------------------
 
