@@ -158,6 +158,12 @@ sumaPotencias q n m
     | otherwise = (q ^ m) * diezbsumatoria n q + sumaPotencias q n (m - 1)
     -- sumatoria de a 
 
+sumatoriaiesima :: Integer -> Integer -> Integer -> Integer 
+-- puedo modificar desde donde empieza  
+sumatoriaiesima i n q
+    | n == i = q ^ n 
+    | otherwise = q ^ n + sumatoriaiesima i ( n - 1 ) q 
+
 --Ejercicio 15 
 ----- Suma de gauss =  1 + 2 + 3 + ...... + n
 ------- Se puede no hacer por recursión con lo siguiente 
