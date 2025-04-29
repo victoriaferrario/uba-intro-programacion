@@ -1,6 +1,7 @@
 -- Guia 4
 
 
+
 factorial :: Integer -> Integer
 -- signatura de la función Integer -> Integer
 factorial n
@@ -155,7 +156,7 @@ sumaPotencias :: Integer -> Integer -> Integer -> Integer
 sumaPotencias q n m 
     -- caso base 
     | m == 0 = 0 
-    | otherwise = (q ^ m) * diezbsumatoria n q + sumaPotencias q n (m - 1)
+    | otherwise = (q ^ m) * sumatoriaiesima (m+1) n q + sumaPotencias q n (m - 1)
     -- sumatoria de a 
 
 sumatoriaiesima :: Integer -> Integer -> Integer -> Integer 
@@ -163,6 +164,16 @@ sumatoriaiesima :: Integer -> Integer -> Integer -> Integer
 sumatoriaiesima i n q
     | n == i = q ^ n 
     | otherwise = q ^ n + sumatoriaiesima i ( n - 1 ) q 
+
+
+----- resolución campus 
+sumaPotenciasValen :: Integer -> Integer -> Integer -> Integer
+sumaPotenciasValen q 1 1 = q^(1+1)
+sumaPotenciasValen q n 1 = q^(n+1) + sumaPotenciasValen q (n-1) 1
+sumaPotenciasValen q 1 m = q^(1+m) + sumaPotenciasValen q 1 (m-1)
+sumaPotenciasValen q n m = q^(n+m) + sumaPotenciasValen q (n-1) m + sumaPotenciasValen q n (m-1) - sumaPotenciasValen q (n-1) (m-1)
+
+
 
 --Ejercicio 15 
 ----- Suma de gauss =  1 + 2 + 3 + ...... + n
@@ -209,5 +220,52 @@ proximoprimo n
     | esPrimo (n+1) = n + 1
     | otherwise = proximoprimo (n + 1)
 
+--Ejercicio 17
+esFibonacci :: Integer -> Bool 
+esFibonacci m = recorreFibonacci m 0 
+
+recorreFibonacci :: Integer -> Integer -> Bool
+recorreFibonacci m n 
+    | fibonacci n == m = True 
+    | fibonacci n > m = False 
+    | otherwise = recorreFibonacci m (n+1)
+
+
+--Ejercicio 18 
+mayorDigitoPar :: Integer -> Integer 
+mayorDigitoPar 0 = -1
+mayorDigitoPar n 
+    | (n < 10) && (mod n 2 == 0)  = n 
+    -- osea me quedo un solo dígito y ese dígito debe ser par
+    | ultimodigito_par  && (ultimodigito >= anteultimodigito) = mayorDigitoPar (div n 100 + ultimodigito * 10 ^ (cantDigitos n-2) ) 
+    -------------------------------------- aca hago recursión sacando los dos ultimos dígitos y poniendo el más grande adelante 
+    | otherwise = mayorDigitoPar (div n 10 ) 
+    -- cuando no es par 
+    where 
+        ultimodigito = iesimoDigito n (cantDigitos n )
+        ultimodigito_par = mod ultimodigito 2 == 0 
+        anteultimodigito = iesimoDigito n (cantDigitos n - 1 )
+        anteultimodigito_par = mod anteultimodigito 2 == 0 
+
+
 --Ejercicio 19 
 esSumaInicialDePrimos :: Integer -> Bool 
+esSumaInicialDePrimos n = sumaPrimosdesde n 0 == 0 
+
+sumaPrimosdesde :: Integer -> Integer ->  Integer 
+sumaPrimosdesde n m 
+    | n <= 0 = -1
+    | (n - proximoprimo m == 0 ) || esPrimo n = 0
+    | otherwise = sumaPrimosdesde (n - proximoprimo m) (m + 1)
+
+
+
+-- --Ejercicio 21 
+-- pitagoras :: Integer -> Integer -> Integer -> Integer 
+-- pitagoras 0 0 _ = 1
+-- pitagoras m n r 
+--     |  n /= 0  && cumple_pitagoras = 1 + pitagoras (m n-1 r)
+--     --- p mantiene su lugar mientras itera q 
+--     |  n == 0  && cumple_pitagoras = 1 + pitagoras (m-1 n )
+--     | otherwise = pitagoras (m n-1 r)
+--     where cumple_pitagoras = n^2 + m^2 <= r^2
