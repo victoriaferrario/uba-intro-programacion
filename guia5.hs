@@ -3,14 +3,9 @@
 Guia Práctica 5: Recursión sobre listas 
 --}
 
-
 --- Ejercicio 1
 ----- 1.1
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-{-# HLINT ignore "Use foldr" #-}
-{-# HLINT ignore "Use even" #-}
-{-# HLINT ignore "Use even" #-}
-{-# HLINT ignore "Redundant bracket" #-}
+
 longitud :: [t] -> Integer
 longitud [] = 0
 longitud (x:xs) = 1 + longitud xs 
@@ -99,7 +94,7 @@ capicua x = x == reverso x
 
 --- Ejercicio 3
 ----- 3.1
-sumatoria :: [Integer] -> Integer 
+sumatoria :: (Num t) => [t] -> t
 sumatoria [] = 0 
 -- sumatoria [x] = x ----> no hace falta este caso base 
 sumatoria (x:xs) = head (x:xs) + sumatoria xs 
@@ -116,6 +111,13 @@ maximo [x] = x
 maximo (x:xs) 
     | x >= head xs = maximo (tail xs ++ [x] )
     |otherwise = maximo xs 
+
+maximoN :: [Integer] -> Integer 
+maximoN (x:[]) = x
+maximoN (x:xs) 
+    | x > maximoN xs = x
+    | otherwise = maximoN xs
+
 
 ----- 3.4
 sumarN :: Integer -> [Integer] -> [Integer]
@@ -189,6 +191,78 @@ contarSinEspacioPrinciFin (x:xs)
 ----- 4(c)
 palabras :: [Char] -> [[Char]]
 palabras [] = []
-palabras (x:xs)
-    | x /= ' ' = x: palabras xs 
-    | x == ' '     
+palabras (x:xs) = sacarpalabras (sacarespaciosprincipiofinal (x:xs))
+
+-- primerapalabraListasinElla ::([Char],[Char]) -> ([Char], [Char])
+-- primerapalabraListasinElla ( x:xs , _ )
+--     | x == ' ' = snd xs
+--     | otherwise = [x] : fst (primerapalabraListasinElla xs)
+
+
+sacarpalabras :: [Char] -> [[Char]]
+sacarpalabras [] = []
+sacarpalabras (x:xs)
+    | x == ' ' = sacarpalabras xs
+    | otherwise = [x] : sacarpalabras xs 
+
+--- Ejercicio 5
+----- 5.1
+sumaAcumulada :: (Num t) => [t] -> [t]
+sumaAcumulada [] = []
+sumaAcumulada [x] = [x]
+sumaAcumulada x = sumaAcumulada menosElUltimo ++  [sumatoria x]
+    where menosElUltimo = reverso(tail (reverso x))
+
+----- 5.2 
+-- descomponerEnPrimos :: [Integer] -> [[Integer]]
+
+
+
+
+
+--- Ejercicio 6
+
+type Texto = [Char]
+type Nombre = Texto
+type Telefono = Texto
+type Contacto = (Nombre, Telefono)
+type ContactosTel = [Contacto]
+
+elNombre :: Contacto -> Nombre 
+elNombre = fst 
+elTelefono :: Contacto -> Telefono
+elTelefono = snd
+
+----- 6.1
+enLosContactos :: Nombre -> ContactosTel -> Bool 
+enLosContactos n [] = False 
+enLosContactos n (x:xs)
+    | n == elNombre x = True 
+    | otherwise = enLosContactos n xs 
+
+----- 6.2
+agregarContacto :: Contacto -> ContactosTel -> ContactosTel 
+agregarContacto cnt [] = [cnt]
+agregarContacto cnt lisCont
+    | enLosContactos (elNombre cnt) lisCont = buscaActualizaNumero cnt lisCont
+    | otherwise = cnt : lisCont
+
+---- precond: lista no vacia y se que E nombre en los contactosTel
+buscaActualizaNumero :: Contacto -> ContactosTel -> ContactosTel 
+buscaActualizaNumero cnt (x:xs)
+    | elNombre cnt == elNombre x =  actualizaNum : xs
+    | otherwise = buscaActualizaNumero cnt xs ++ [x]
+       where  actualizaNum = (elNombre x , elTelefono cnt)
+
+
+eliminarContacto :: Nombre -> ContactosTel -> ContactosTel 
+
+
+{-- contactos = [ 
+    (['a','n','a'],['1','2','3']), 
+    (['a','b','a'],['1','2','3']),
+    ]
+
+    (['a','l','e'],['4','5','5'])
+--}
+
