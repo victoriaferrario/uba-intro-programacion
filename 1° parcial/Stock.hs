@@ -2,10 +2,8 @@
 module EjerciciosParcial where
 
 -- EJEMPLOS para probar funciones a falta de testing :(
-stock :: [(String,Int)] = [("manzana",20),("banana",1),("pera",10),("kiwi",13)]
-precios :: [(String,Float)] = [("manzana", 3.2),("banana", 3.4),("pera", 8),("kiwi", 3.1)]
-
-
+stock = [("manzana",20),("banana",1),("pera",10),("kiwi",13)]
+precios = [("manzana", 3.2),("banana", 3.4),("pera", 8),("kiwi", 3.1)]
 
 
 {--
@@ -86,13 +84,13 @@ asegura: {res es igual a la suma de los precios de todos los productos que est �
 }
 Para resolver este ejercicio pueden utilizar la funci ́on del Preludio de Haskell fromIntegral que dado un valor de tipo Int devuelve su equivalente de tipo Float.
 --}
-dineroEnStock ::[(String, Int)] -> [(String, Float)] -> Float
+dineroEnStock ::[(String, Int)] ->[(String, Double)] ->Double
 dineroEnStock [] _ = 0
 dineroEnStock (x:xs) (y:ys) = precioPorCantidad + dineroEnStock xs (y:ys)
     where precioPorCantidad = precioDeProducto (fst x) (y:ys) * fromIntegral(snd x)
 
 -- precond: todo producto de la lista de precios existe en la de productos
-precioDeProducto :: String ->[(String, Float)] -> Float
+precioDeProducto :: String ->[(String, Double)] -> Double
 precioDeProducto p (x:xs)
     | p == fst x = snd x 
     | otherwise = precioDeProducto p xs
@@ -109,7 +107,7 @@ asegura: {Para todo 0 ≤ i < |precios|, si stockDeProducto(stock, precios[i]0) 
 res[i]1 = precios[i]1 } }
 --}
 -- basicamente que si hay mas (estricto) de 10 en stock se hace un 80% descuento 
-aplicarOferta :: [(String, Integer)] -> [(String, Float)] -> [(String, Float)]
+aplicarOferta :: [(String, Integer)] -> [(String, Double)] -> [(String, Double)]
 aplicarOferta [] _ = []
 aplicarOferta (x:xs) (y:ys)
     | snd x > 10 = (fst x, precioDescuento) : aplicarOferta xs (y:ys)

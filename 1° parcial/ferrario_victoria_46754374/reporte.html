@@ -1,0 +1,401 @@
+<h1>Parcial - tema1</h1>
+<p>Nota: 7.6 / 10.0 (APROBADO)</p>
+<pre><code>puntaje ej1: 2
+puntaje ej2: 2
+puntaje ej3: 0.0
+puntaje ej4: 2.62
+puntaje ej5: 1
+</code></pre>
+<h2>Datos del alumno</h2>
+<p>Nombre: Victoria Ferrario</p>
+<p>DNI: 46754374</p>
+<p>LU: </p>
+<p>Maquina: 24-07</p>
+<h2>Enunciado</h2>
+<html>
+
+<head>
+  <link rel="icon" href="data:,">
+  <link href="css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+<div>
+
+<h1> Parcial Haskell - Tema 1 </h1>
+
+<p>
+
+<h2> Importante </h2>
+Template de funciones a implementar <a href="#" onclick="forceDownload('/parcial/Template_t1.hs','SolucionT1.hs');">aca</a><br>
+Lista de funciones permitidas <a href="/static/haskell_permitidas.html">aca</a><br>
+Ejemplo de hunit <a href="#" onclick="forceDownload('/parcial/Tests_template_t1.hs','Template_Tests_t1.hs');">aca</a>
+
+<p>
+
+<form name="form1" action="/submit_examen" method="post" enctype="multipart/form-data" onsubmit="return validaciones(event)">
+
+<h2> Enunciado </h2>
+
+<ol>
+ <p>
+  La codificación por sustitución es una de las técnicas de cifrado más simples,
+  en el que un caracter en el texto original es reemplazado por otro caracter dependiendo de un mapeo. Este mapeo puede representarse con una secuencia de tuplas de dos caracteres, donde la primera
+  componente de la tupla representa el caracter original y la segunda componente el caracter por el cual se lo va a sustituir.
+
+  Por simplicidad, en este problema codificaremos solo los caracteres que aparecen en el mapeo dado. Todos los restantes caracteres
+  quedan inalterados en el mensaje codificado.
+
+</p>
+<p>
+  Para implementar este sistema de codificación nos enviaron las siguientes especificaciones y nos pidieron que hagamos el desarrollo enteramente en Haskell, utilizando los tipos
+  requeridos y solamente las funciones que se ven en la materia Introducción a la Programación / Algoritmos y Estructuras de Datos I (FCEyN-UBA).
+</p>
+  <li> Ejercicio 1 (2 puntos)</li>
+  <p>problema hayQueCodificar (<i>c</i>: Char, <i>mapeo</i>: seq⟨Char x Char⟩ ) : Bool {<br>
+    &nbsp; <strong>requiere:</strong> {No hay elementos repetidos entre las primeras componentes de <i>mapeo</i>} <br>
+    &nbsp; <strong>requiere:</strong> {No hay elementos repetidos entre las segundas componentes de <i>mapeo</i>} <br>
+    &nbsp; <strong>asegura:</strong> {<i>res</i> = true <=> <i>c</i> es igual a la primera componente de alguna tupla de <i>mapeo</i>} <br>
+  }<br>
+  </p>
+
+  <li> Ejercicio 2 (2 puntos)</li>
+  <p>problema cuantasVecesHayQueCodificar (<i>c</i>: Char, <i>frase</i>: seq⟨Char⟩, <i>mapeo</i>: seq⟨Char x Char⟩ ) : Z {<br>
+    &nbsp; <strong>requiere:</strong> {No hay elementos repetidos entre las primeras componentes de <i>mapeo</i>} <br>
+    &nbsp; <strong>requiere:</strong> {No hay elementos repetidos entre las segundas componentes de <i>mapeo</i>} <br>
+    &nbsp; <strong>requiere:</strong> {|<i>frase</i>| > 0 } <br>
+    &nbsp; <strong>requiere:</strong> {<i>c</i> pertenece a <i>frase</i>} <br>
+    &nbsp; <strong>asegura:</strong> {(<i>res</i> = 0 y hayQueCodificar (<i>c</i>, <i>mapeo</i>) = false) o
+      (<i>res</i> = cantidad de veces que <i>c</i> aparece en <i>frase</i> y hayQueCodificar (<i>c</i>, <i>mapeo</i>) = true)} <br>
+  }<br>
+  </p>
+
+  <li> Ejercicio 3 (2 puntos)</li>
+  <p>
+  problema laQueMasHayQueCodificar (<i>frase</i>: seq⟨Char⟩, <i>mapeo</i>: seq⟨Char x Char⟩ ) : Char {<br>
+    &nbsp; <strong>requiere:</strong> {No hay elementos repetidos entre las primeras componentes de <i>mapeo</i>} <br>
+    &nbsp; <strong>requiere:</strong> {No hay elementos repetidos entre las segundas componentes de <i>mapeo</i>} <br>
+    &nbsp; <strong>requiere:</strong> {|<i>frase</i>| > 0 } <br>
+    &nbsp; <strong>requiere:</strong> {Existe al menos un <i>c</i> que pertenece a <i>frase</i> y hayQueCodificar(<i>c</i>, <i>mapeo</i>)=true} <br>
+    &nbsp; <strong>asegura:</strong> {<i>res</i> = <i>c</i> donde <i>c</i> es el caracter tal que cuantasVecesHayQueCodificar(<i>c</i>, <i>frase</i>, <i>mapeo</i>)
+      es mayor a cualquier otro caracter perteneciente a <i>frase</i>}<br>
+      &nbsp; <strong>asegura:</strong> {Si existen más de un caracter <i>c</i> que cumple la condición anterior, devuelve el que aparece primero en <i>frase</i>
+  }<br>
+  </p>
+
+  <li> Ejercicio 4 (3 puntos)</li>
+  <p>problema codificarFrase (<i>frase</i>: seq⟨Char⟩, <i>mapeo</i>: seq⟨Char x Char⟩ ) : seq ⟨Char⟩ {<br>
+    &nbsp; <strong>requiere:</strong> {No hay elementos repetidos entre las primeras componentes de <i>mapeo</i>} <br>
+    &nbsp; <strong>requiere:</strong> {No hay elementos repetidos entre las segundas componentes de <i>mapeo</i>} <br>
+    &nbsp; <strong>requiere:</strong> {|<i>frase</i>| > 0 } <br>
+    &nbsp; <strong>asegura:</strong> {|<i>res</i>| = | <i>frase</i>|} <br>
+    &nbsp; <strong>asegura:</strong> { Para todo 0 <= <i>i</i> < <i>|frase|</i> si hayQueCodificar(<i>frase[i]</i>, <i>mapeo</i>) = true
+      entonces <i>res[i]= (mapeo[j])<sub>1</sub></i>, para un <i>j</i> tal que 0 <= <i>j < |mapeo|</i> y <i>mapeo[j])<sub>0</sub></i>=<i>frase[i]</i>}<br>
+    &nbsp; <strong>asegura:</strong> { Para todo 0 <= <i>i</i> < <i>|frase|</i> si hayQueCodificar(<i>frase[i]</i>, <i>mapeo</i>) = false
+      entonces <i>res[i]= frase[i]</i>}<br>
+  }
+  </p>
+  <li> Ejercicio 5 (1 punto)</li>
+  <p>
+    Conteste marcando la opción correcta. Si un usuario no cumple con la precondición de la especificación de un programa y el
+    programa no termina (se cuelga) : <br>
+
+  <input type="radio" name="mchoice_1" id="opcion1" value="1" />
+      <label for="opcion1">El usuario tiene derecho a quejarse porque el programador debería haber contemplado ese caso.</label> <br>
+  <input type="radio" name="mchoice_1" id="opcion2" value="2" />
+      <label for="opcion2">El usuario no tiene derecho a quejarse, pero el programa es incorrecto porque no debería colgarse.</label> <br>
+  <input type="radio" name="mchoice_1" id="opcion3" value="3" />
+      <label for="opcion3">El usuario no tiene derecho a quejarse y no importa que el programa se cuelgue para este caso.</label> <br>
+  </p>
+  <p></p>
+
+</ol>
+
+<hr>
+  <h3 style="color:#1A5276">Adjunta el archivo con tu solución:</h3>
+  <p><b style="color:red">Solo se puede adjuntar 1 archivo de extensión .hs. En caso de haber desarrollado tests propios, no deben ser entregados.</b></p>
+
+  <label for="archivo">Seleccionar archivo a enviar:</label>
+  <input type="file" id="archivo" name="archivo" required accept=".hs,text/x-haskell"/>
+
+  <input type="submit" value="Enviar"
+        style= "background-color: #1A5276; border-radius: 5px;
+                margin-top:10px;padding: 10px 150px;color: #FFFFFF;
+                font-size: 20px;cursor: pointer; width:100%" >
+
+</form>
+
+</div>
+
+<script>
+  function validaciones(event) {
+    var confirmacion = confirm("Confirmo que revise mis respuestas y que quiero entregar mi examen");
+    if (!confirmacion) {
+        event.preventDefault();
+        event.returnValue = false;
+        return false;
+      }
+      event.returnValue = true;
+      return true;
+  }
+</script>
+
+<script>
+// registro una funcion para mostrar el archivo cuando se adjunta.
+// de esa forma evitamos que se adjunten otros archivos por error
+document
+  .getElementById('archivo')
+  .addEventListener(
+      'change',
+      function () {
+          var fr = new FileReader();
+          fr.onload = function () {
+              alert(this.result);
+          };
+          fr.readAsText(this.files[0]);
+      }
+  );
+
+// para forzar a bajar el template de hunit y que no se pueda abrir en un nuevo tab
+// (el browser intenta mostrar el codigo como HTML y el formato se ve raro)
+function forceDownload(url, filename) {
+  fetch(url).then(function(t) {
+    return t.blob().then((b) => {
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(b);
+      a.setAttribute("download", filename);
+      a.click();
+    });
+  });
+}
+</script>
+
+</body>
+
+</html>
+
+<h2>Solucion entregada por el alumno</h2>
+<pre><code>
+-- EJERCICIO 1
+hayQueCodificar :: Char -&gt; [(Char,Char)] -&gt; Bool
+hayQueCodificar _ [] = False
+hayQueCodificar c (x:xs)
+    | c == fst x = True
+    | otherwise = hayQueCodificar c xs
+
+-- EJERCICIO 2
+cuantasVecesHayQueCodificar :: Char -&gt; [Char] -&gt; [(Char,Char)] -&gt; Int
+cuantasVecesHayQueCodificar _ _ [] = 0 
+cuantasVecesHayQueCodificar c (y:ys) (x:xs)
+    | hayQueCodificar c (x:xs) = cantApariciones c (y:ys)
+    | otherwise = 0 
+
+-- AUX ejercicio 2 = cuenta cantidad de apariciones
+cantApariciones :: Char -&gt; [Char] -&gt; Int
+cantApariciones _ [] = 0
+cantApariciones c (x:xs) 
+    | c == x = 1 + cantApariciones c xs
+    | otherwise = cantApariciones c xs
+
+
+--EJERCICIO 3
+laQueMasHayQueCodificar :: [Char] -&gt; [(Char,Char)] -&gt; Char
+laQueMasHayQueCodificar (y:ys) (x:xs)
+    | cuantasVecesHayQueCodificar y (y:ys) (x:xs) &gt; cuantasVecesHayQueCodificar (head fraseSinLetra) fraseSinLetra (x:xs) = y 
+    | otherwise = laQueMasHayQueCodificar fraseSinLetra (x:xs)
+
+    where 
+        fraseSinLetra = quitarTodasApariciones y (y:ys)
+
+-- AUX ej3
+quitarTodasApariciones :: Char -&gt; [Char] -&gt; [Char]
+quitarTodasApariciones _ [] = [] 
+quitarTodasApariciones c (x:xs) 
+    | c == x = quitarTodasApariciones c xs
+    | otherwise = x : quitarTodasApariciones c xs
+
+-- EJERCICIO 4 
+codificarFrase :: [Char] -&gt; [(Char,Char)] -&gt; [Char]
+codificarFrase [] _ = []
+codificarFrase (y:ys) (x:xs) 
+    | hayQueCodificar y (x:xs) = codificarLetra y (x:xs) : codificarFrase ys (x:xs)
+    | otherwise = y : codificarFrase ys (x:xs)
+
+--AUX : codifica un caracter en base a un mapeo (con la condicion que c existe en las primeras componentes de [(Char,Char)])
+codificarLetra :: Char -&gt; [(Char,Char)] -&gt; Char
+codificarLetra c (x:xs) 
+    | c == fst x = snd x
+    | otherwise = codificarLetra c xs
+
+
+
+
+</code></pre>
+<h2>Resultado de la compilacion</h2>
+<pre><code>Loaded package environment from /home/jgodoy/.ghc/x86_64-linux-9.4.7/environments/default
+[1 of 2] Compiling Main             ( correcciones/haskell-tm/ferrario_victoria_46754374_X_X_X/submission.hs.main.hs, correcciones/haskell-tm/ferrario_victoria_46754374_X_X_X/submission.hs.main.o )
+[2 of 2] Linking correcciones/haskell-tm/ferrario_victoria_46754374_X_X_X/submission.hs.main
+
+</code></pre>
+<h2>Ejecucion de los tests</h2>
+<h3>tema1-test-ej1.hs.compilacion.out</h3>
+<p>Puntaje del ej: 2 / 2</p>
+<pre><code>
+
+Cases: 9  Tried: 1  Errors: 0  Failures: 0
+
+Cases: 9  Tried: 2  Errors: 0  Failures: 0
+
+Cases: 9  Tried: 3  Errors: 0  Failures: 0
+
+Cases: 9  Tried: 4  Errors: 0  Failures: 0
+
+Cases: 9  Tried: 5  Errors: 0  Failures: 0
+
+Cases: 9  Tried: 6  Errors: 0  Failures: 0
+
+Cases: 9  Tried: 7  Errors: 0  Failures: 0
+
+Cases: 9  Tried: 8  Errors: 0  Failures: 0
+
+
+Cases: 9  Tried: 9  Errors: 0  Failures: 0
+
+
+Cases: 9  Tried: 9  Errors: 0  Failures: 0
+
+</code></pre>
+<h3>tema1-test-ej2.hs.compilacion.out</h3>
+<p>Puntaje del ej: 2 / 2</p>
+<pre><code>
+
+Cases: 9  Tried: 1  Errors: 0  Failures: 0
+
+Cases: 9  Tried: 2  Errors: 0  Failures: 0
+
+Cases: 9  Tried: 3  Errors: 0  Failures: 0
+
+Cases: 9  Tried: 4  Errors: 0  Failures: 0
+
+Cases: 9  Tried: 5  Errors: 0  Failures: 0
+
+Cases: 9  Tried: 6  Errors: 0  Failures: 0
+
+Cases: 9  Tried: 7  Errors: 0  Failures: 0
+
+Cases: 9  Tried: 8  Errors: 0  Failures: 0
+
+
+Cases: 9  Tried: 9  Errors: 0  Failures: 0
+
+
+Cases: 9  Tried: 9  Errors: 0  Failures: 0
+
+</code></pre>
+<h3>tema1-test-ej3.hs.compilacion.out</h3>
+<p>Puntaje del ej: 0.0 / 2</p>
+<pre><code>
+
+
+### Error in:   0:laQueMasHayQueCodificar stringDeUnChar
+Solucion.hs:(12,1)-(15,19): Non-exhaustive patterns in function cuantasVecesHayQueCodificar
+
+
+
+Cases: 8  Tried: 1  Errors: 1  Failures: 0
+
+
+### Error in:   1:laQueMasHayQueCodificar stringDeUnCharRepetido
+Solucion.hs:(12,1)-(15,19): Non-exhaustive patterns in function cuantasVecesHayQueCodificar
+
+
+
+Cases: 8  Tried: 2  Errors: 2  Failures: 0
+
+Cases: 8  Tried: 3  Errors: 2  Failures: 0
+
+
+### Error in:   3:laQueMasHayQueCodificar variasAparicionesDosLetrasGana1ra
+Solucion.hs:(12,1)-(15,19): Non-exhaustive patterns in function cuantasVecesHayQueCodificar
+
+
+
+Cases: 8  Tried: 4  Errors: 3  Failures: 0
+
+
+### Error in:   4:laQueMasHayQueCodificar variasAparicionesDosLetrasGana2da
+Solucion.hs:(12,1)-(15,19): Non-exhaustive patterns in function cuantasVecesHayQueCodificar
+
+
+
+Cases: 8  Tried: 5  Errors: 4  Failures: 0
+
+
+### Error in:   5:laQueMasHayQueCodificar variasAparicionesTresLetrasGana3ra
+Solucion.hs:(12,1)-(15,19): Non-exhaustive patterns in function cuantasVecesHayQueCodificar
+
+
+
+Cases: 8  Tried: 6  Errors: 5  Failures: 0
+
+
+### Error in:   6:laQueMasHayQueCodificar fraseSoloConLetrasDiferentes
+Solucion.hs:(12,1)-(15,19): Non-exhaustive patterns in function cuantasVecesHayQueCodificar
+
+
+
+Cases: 8  Tried: 7  Errors: 6  Failures: 0
+
+
+### Error in:   7:laQueMasHayQueCodificar laMasFrecuenteNoSeMapea
+Solucion.hs:(12,1)-(15,19): Non-exhaustive patterns in function cuantasVecesHayQueCodificar
+
+
+Cases: 8  Tried: 8  Errors: 7  Failures: 0
+
+
+Cases: 8  Tried: 8  Errors: 7  Failures: 0
+
+</code></pre>
+<h3>tema1-test-ej4.hs.compilacion.out</h3>
+<p>Puntaje del ej: 2.62 / 3</p>
+<pre><code>
+
+
+### Error in:   0:codificarFrase fraseLarga mapeoVacio
+Solucion.hs:(43,1)-(46,46): Non-exhaustive patterns in function codificarFrase
+
+
+
+Cases: 8  Tried: 1  Errors: 1  Failures: 0
+
+Cases: 8  Tried: 2  Errors: 1  Failures: 0
+
+Cases: 8  Tried: 3  Errors: 1  Failures: 0
+
+Cases: 8  Tried: 4  Errors: 1  Failures: 0
+
+Cases: 8  Tried: 5  Errors: 1  Failures: 0
+
+Cases: 8  Tried: 6  Errors: 1  Failures: 0
+
+Cases: 8  Tried: 7  Errors: 1  Failures: 0
+
+
+Cases: 8  Tried: 8  Errors: 1  Failures: 0
+
+
+Cases: 8  Tried: 8  Errors: 1  Failures: 0
+
+</code></pre>
+<h3>mchoice.json-ej5.compilacion.out</h3>
+<p>Puntaje del ej: 1 / 1</p>
+<pre><code>mchoice ej5: respuesta del alumno=3, respuesta correcta=3
+
+Ran 1 test in 0 seconds
+
+OK
+
+</code></pre>
+<p>FIN</p>
