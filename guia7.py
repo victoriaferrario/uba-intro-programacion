@@ -11,6 +11,13 @@ x: list [tipo_dato] = [elementos, lista]
 x: dict[str,float] = {” c l a v e ” : 2 . 0 }
 
 
+lista vacia 
+un elemento 
+dos elementos
+el mismo elemento
+
+    
+
 """
 
 import math 
@@ -36,13 +43,6 @@ def pertenece_str (s: list[str], e:str) -> bool:
             res = True
     return res
 
-"""
-lista vacia 
-un elemento 
-dos elementos
-el mismo elemento
-"""
-    
 
 # EJERCICIO 2y
 def divide_a_todos(s: list[int], e:int) -> bool:
@@ -134,6 +134,7 @@ def iguales_consecutivos (s: list[int]) -> bool:
 
 
 #EJERCICIO 12
+
 ####### función no usada
 def cant_letra (s:str, char:str) -> int: 
     res = 0
@@ -173,7 +174,7 @@ def pos_secuencia_ordenada_mas_larga (s: list[int]) -> int:
         i += 1
         
     return final[:1]
-    # debería returnar un integer no una lista con un elemento pero bueno 
+    # debería returnar un integer no una lista con un elemento 
     
 
 # EJERCICIO 14
@@ -300,8 +301,58 @@ def saldoActual (t: list[tuple()]) -> int:
         else: # en otro caso debe ser "R" de retiro, resto
             saldo = saldo - movimiento[1]
     return saldo 
-        
-    
+
+
+# PARTE 3 ##############################################
+
+Matriz_num = list[list[int]]
+
+matriz = [[1,2,3],[4,5,6],[1,3]]
+
+def pertenece_a_cada_uno_version_1(s: Matriz_num, e:int, res:list[bool]) :
+    for fila in s:
+        if pertenece(fila, e):
+            res.append(True)
+        else: 
+            res.append(False)
+            
+
+def pertenece_a_cada_uno_version_2(s: Matriz_num, e:int) -> list[bool]:
+    res:list[bool] = []
+
+    for fila in s:
+        if pertenece(fila, e):
+            res.append(True)
+        else: 
+            res.append(False)
+            
+    return res
+            
+# Ejercicio 6 
+
+#(1)
+def es_matriz(s: Matriz_num) -> bool:
+    cont: int = 0
+    if len(s) > 0: 
+        for fila in s :
+            if len(fila) > 0 and len(fila) == len(s[0]):
+                cont += 1
+    return cont == len(s) 
+
+#(2)
+def filas_ordenadas(m: Matriz_num) -> bool: 
+    res=True
+    i = 0 
+    while i < len(m) and res == True :
+        if not ordenados(m[i]):
+            res = False 
+        i += 1
+    return res 
+
+#(3)
+
+
+
     
     
     
