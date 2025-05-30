@@ -21,6 +21,7 @@ el mismo elemento
 """
 
 import math 
+import random 
 
 # EJERCICIO 1
 def pertenece (s: list[int], e:int) -> bool:
@@ -350,11 +351,55 @@ def filas_ordenadas(m: Matriz_num) -> bool:
     return res 
 
 #(3)
+def columna(m: Matriz_num, c: int) -> list[int]:
+    res: list[int] = []
+    for fila in m :
+        res.append(fila[c])
+    return res
 
+#(4)
+def columnas_ordenadas(m: Matriz_num) -> list[bool]:
+    res: list[bool] = []
+    for c in range (len(m[0])) :
+        if ordenados(columna(m, c)):
+            res.append(True)
+        else: res.append(False)
+    return res
 
+#(5)
+def trasponer(m: Matriz_num) -> Matriz_num:
+    nueva_matriz: Matriz_num = []
+    for c in range(len(m[0])):
+        nueva_matriz.append(columna(m,c))
+        
+    return nueva_matriz
 
-    
-    
+## EJEMPLOS
+matriz = [[1,8,3],[4,5,6]]
+
+# PARTE 4 ##############################################
+
+def construir_lista()-> list[str]: 
+    s: str = ':)'
+    res: list[str] = []
+    while s != '' and s != 'listo':
+        s = input('nombre alumno -->')
+        res.append(s)
+    return res 
+
+def siete_y_medio() -> tuple(str,list[int]):
+    cartas: list[int] = [0,1,2,3,4,5,6,7,10,11,12]
+    s:str = 'o:'
+    cartas_acumuladas: list[int] = []
+    lista_suma: list[int] = []
+    while suma_total(lista_suma) != 7.5 and s != 'p':
+        s = input('plantao = p * otra más = +')
+        if s == '+':
+            carta_random = random.choice(cartas)
+            cartas_acumuladas.append(carta_random)
+            if pertenece([10,11,12], carta_random):
+                lista_suma.append(0.5)
+            else: lista_suma.append(carta_random)
     
     
     
