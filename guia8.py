@@ -6,6 +6,21 @@ Created on Wed May 28 11:52:36 2025
 @author: Estudiante
 """
 
+import random 
+
+#---------------- PILAS 
+from queue import LifoQueue as Pila 
+
+
+#EJERCICIO 1
+# nunca dice que no se pueden repetir
+def generar_nros_al_azar(cantidad:int, desde:int, hasta:int) -> Pila[int]:
+    p = Pila()
+    for i in range (cantidad) :
+        p.put(random.randint(desde, hasta))
+        
+    return p 
+
 notas = [('n', 1), ('t', 3), ('n', 8)]
 
 def calcular_promedio_por_studiante(notas: list[tuple[str,float]]) -> dict[str, int]:
@@ -79,7 +94,6 @@ def clonar_sin_comentarios(nombre_archivo: str):
             x += 1
     archivo.close()
 
-clonar_sin_comentarios("existe.txt") 
 
 def agrupar_por_longitud(nombre_archivo:str) -> dict[int:int]:
     
