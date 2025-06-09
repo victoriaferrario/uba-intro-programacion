@@ -1,0 +1,98 @@
+# Ejercicio 4
+# Ítem 2
+def producto_1(n: int) -> int:
+    res: int = 1
+    i: int = 1
+    while i <= n:
+        res = res * i
+        i = i + 1
+    return res
+
+# Ítem 4
+def producto_3(n: int) -> int:
+    res: int = 1 # 1 OE
+    i: int = 1 # 1 OE
+    while i <= n: # N + 1
+        j: int = 1 # 1 OE
+        while j <= n: # N + 1
+            res = res * i * j # 3 OE
+            j = j + 1 # 2 OE
+        i = i + 1 # 2 OE
+    return res # 1 OE
+
+# Formula Final =  
+# 1+1+n+1+n(1+n+1+2+3n+2n)+1 = 6n²+5n+4
+
+# Ítem 7
+def producto_6(n: int) -> int:
+    res: int = 1 # 1 OE
+    i: int = 1 # 1 OE
+    while i <= 2**n: #  2 * (2^n + 1 se hace esta cantidad de veces) son dos operaciones  OE
+        producto: int = 1 # 1 OE
+        j: int = 1 # 1 OE
+        while j <= n: # N + 1
+            if (i // (2 ** (j-1))) % 2 == 1: # comp 1 div 1 pot 1 rest 1 mod 1
+                producto = producto * j # 2 OE
+            else: 
+                producto = producto * 1 # 2 OE
+            j = j + 1 # 2 OE
+        i = i + 1 # 2 OE
+        res = res * producto # 2 OE
+    return res # 1 OE
+
+# Formula Final = 
+# 1 + 1 + (2^n + 1) + n (1 + 1 + (n+1) + n (5 + 2 + 2) + 2 + 2) + 1
+# 4+ N + n (7+n10) = 10 n² + 8 n + 4
+
+
+
+# Ejercicio 5.5
+# Requiere: es matriz cuadrada (#filas = #columnas)
+def diagonal_principal_v1(m: list[list[int]]) -> list[int]:
+    res: list[int] = [] #  1 OE
+    n: int = len(m) # Tlen(m)
+    i: int = 0 # 1 OE
+    while i < n: # N + 1
+        j: int = 0 # 1 OE (n veces)
+        while j < n: # N + 1 (n veces)
+            if i == j: # 1 comparación 
+                res.append(m[i][j]) # T [append] # T [acceder] * 2 
+            j = j + 1 # 2 OE
+        i = i + 1 # 2 OE
+    return res # 1 OE
+
+# Fórmula = 1 + tlen(m) + 1 + n + 1 + n (1 + n + 1 + n (1+2) + 2) + 1
+
+# Requiere: es matriz cuadrada (#filas = #columnas)
+def diagonal_principal_v2(m: list[list[int]]) -> list[int]:
+    res: list[int] = [] # 1 
+    n: int = len(m) # Tlen(m)
+    i: int = 0 # 1
+    while i < n: # n + 1
+        res.append(m[i][i]) # T append # T acceder* 2
+        i = i + 1 # 2
+    return res # 1 
+
+# 1 + Tlen(m) + 1 + n + 1 + n (Tappend + (T acceder*2) + 2) + 1
+# 4 + 3n + Tlen(m) + n Tappend + 2n Tacceder
+
+
+# Ejercicio 6.1
+def contar_pares(s: list[int]) -> int:
+    res: int = 0
+    i: int = 0
+    while i < len(s):
+        if s[i] % 2 == 0:
+            res = res + s[i]
+        i = i + 1
+    return res
+
+
+# Ejercicio 6.2
+def suma_hasta_umbral(s: list[int], umbral: int) -> int:
+    res: int = 0
+    i: int = 0
+    while i < len(s) and s[i] < umbral:
+        res = res + s[i]
+        i = i + 1
+    return res
