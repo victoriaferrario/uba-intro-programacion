@@ -56,12 +56,12 @@ def diagonal_principal_v1(m: list[list[int]]) -> list[int]:
         j: int = 0 # 1 OE (n veces)
         while j < n: # N + 1 (n veces)
             if i == j: # 1 comparación 
-                res.append(m[i][j]) # T [append] # T [acceder] * 2 
+                res.append(m[i][j]) # T [append] # T [acceder] * 2  se va a ejecutar n veces (una vez por fila)
             j = j + 1 # 2 OE
         i = i + 1 # 2 OE
     return res # 1 OE
 
-# Fórmula = 1 + tlen(m) + 1 + n + 1 + n (1 + n + 1 + n (1+2) + 2) + 1
+# Fórmula = 1 + tlen(m) + 1 + n + 1 + n (1 + n + 1 + n (1+2+1) +2T[.] + 2) + 1 + sumatoria deTappend(i) que va desde cero hasta n-1
 
 # Requiere: es matriz cuadrada (#filas = #columnas)
 def diagonal_principal_v2(m: list[list[int]]) -> list[int]:
