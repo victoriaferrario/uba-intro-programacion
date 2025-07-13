@@ -1,0 +1,537 @@
+<h1>Parcial - tema2</h1>
+<p>Nota: 10.0 / 10.0 (APROBADO)</p>
+<pre><code>puntaje ej1: 2
+puntaje ej2: 2.5
+puntaje ej3: 2.5
+puntaje ej4: 2
+puntaje ej5: 0.5
+puntaje ej6: 0.5
+</code></pre>
+<h2>Datos del alumno</h2>
+<p>Nombre: Victoria Ferrario</p>
+<p>DNI: 46754374</p>
+<p>LU: </p>
+<p>Maquina: 27-07</p>
+<h2>Enunciado</h2>
+<!doctype html>
+<html>
+<head>
+  <link rel="icon" href="data:,">
+  <link href="css/style.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+
+  <style>
+    th, td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .conditions {
+        margin-left: 20px;
+    }
+</style>
+</head>
+
+<body style="width: 50%;margin: 1% auto;">
+
+<div> 
+<h1> Parcial Python - Tema 2 </h1>
+
+<h2> Importante </h2>
+
+<ul>
+  <li>El parcial se aprueba con 6 puntos</li>
+  <li>Template de funciones a implementar <a href="#" onclick="forceDownload('/parcial/Template_t2.py','Template_t2.py');">acá</a><br></li>
+  <li>Lista de funciones permitidas <a href="/static/python_permitidas.html">acá</a></li>
+  <li>Para testear el código pueden usar <a href="#" onclick="forceDownload('/parcial/tema2-test.py', 'tema2-test.py')">este</a> archivo que ya cuenta con todo lo necesario para desarrollar sus propios tests (este archivo no se entrega)</li>
+</ul>
+
+Implementar las siguientes especificaciones en Python.
+
+<form name="form1" action="/submit_examen" method="post" enctype="multipart/form-data" onsubmit="return validaciones(event)">
+
+  <hr style="width: 100%;">
+  <h3 style="color:#1A5276">Ejercicio 1 [2 puntos]</h3>
+
+<p>Implementar la función cantidad_parejas_que_suman:</p>
+
+<p> problema cantidad_parejas_que_suman (in <i>s</i>: seq⟨Z⟩, in <i>n</i>: Z) : Z {<br>
+  &nbsp; <strong>requiere:</strong> { - }<br>
+  &nbsp; <strong>asegura:</strong> { res es la cantidad de parejas s[i] y s[j] de números de s tales que s[i] + s[j] = n (con i < j) }<br>
+}<br>
+</p>
+
+<pre style="background-color: #f0f0f0; /* Color de fondo del recuadro */
+padding: 2px; /* Espacio interior */
+border: 1px solid #ccc; /* Borde del recuadro */
+border-radius: 5px; /* Bordes redondeados */">
+Ejemplo: <b>cantidad_parejas_que_suman([1,3,2,5,4,8], 5)</b> debe devolver <b>2</b>
+</pre>
+
+  <hr style="width: 100%;">
+  <h3 style="color:#1A5276">Ejercicio 2 [2,5 puntos] </h3>
+
+<p>En un supermercado tenemos una fila de clientes esperando para ser atendidos por algún cajero.
+  Cada cliente tiene un nombre, un método de pago y una cantidad de productos.
+  La fila de clientes se representa como una Cola de <code>String x String x Z</code>, donde el primer elemento es el nombre del cliente, el segundo es el método de pago y el tercero es la cantidad de productos.
+  Implementar la función pasar_por_autoservicio:
+  </p>
+
+  Nota: los métodos de pago son strings conformados por letras minúsculas.
+
+<p> problema pasar_por_autoservicio (inout <i>clientes</i>: Cola⟨ String x String x Z ⟩) : String {<br>
+  &nbsp; <strong>requiere:</strong>{ Las primeras componentes de <i>clientes</i> son strings no vacíos y todos distintos entre sí }<br>
+  &nbsp; <strong>requiere:</strong>{ Las terceras componentes de <i>clientes</i> son números positivos }<br>
+  &nbsp; <strong>requiere:</strong>{ Existe al menos un elemento <i>c</i> dentro de la cola <i>clientes</i> tal que c<sub>1</sub> ≠ "efectivo" y c<sub>2</sub> ≤ 15 }<br>
+  &nbsp; <strong>modifica:</strong> { <i>clientes</i> }<br>
+  &nbsp; <strong>asegura:</strong> { Sea <i>c</i> el primer elemento insertado en la cola <i>clientes</i> tal que c<sub>1</sub> ≠ "efectivo" y c<sub>2</sub> ≤ 15,
+    entonces <i>res</i> = c<sub>0</sub> }<br>
+  &nbsp; <strong>asegura:</strong> { <i>clientes</i> contiene todos los elementos de <i>clientes@pre</i> excepto la tupla que contiene a res en su primera posición, en el mismo orden que en <i>clientes@pre</i>. }<br>
+  }<br>
+</p>
+<pre style="background-color: #f0f0f0; /* Color de fondo del recuadro */
+padding: 2px; /* Espacio interior */
+border: 1px solid #ccc; /* Borde del recuadro */
+border-radius: 5px; /* Bordes redondeados */">
+Ejemplo: <b>pasar_por_autoservicio(clientes)</b> debe devolver <b>"Bruno"</b> (y quitar su tupla de la cola)
+si clientes es una cola en la cual se insertaron (en orden) los siguientes elementos:
+<ol>
+  <li style="margin: -12px 0;">("Ana", "efectivo", 13)</li>
+  <li style="margin: -12px 0;">("Juan", "qr", 22)</li>
+  <li style="margin: -12px 0;">("Bruno", "tarjeta", 14)</li>
+</ol>
+</pre>
+
+<p>
+  <hr style="width: 100%;">
+  <h3 style="color:#1A5276">3) Ejercicio 3 [2,5 puntos]</h3>
+  <p>Implementar la función intercambiar_e_invertir_columnas:</p>
+
+<p> problema intercambiar_e_invertir_columnas(inout <i>A</i>: seq⟨seq⟨Z⟩⟩, in col1: Z, in col2: Z) {<br>
+  &nbsp; <strong>requiere:</strong> { Todas las filas de <i>A</i> tienen la misma longitud (estrictamente positiva)}<br>
+  &nbsp; <strong>requiere:</strong> { |<i>A</i>| > 0}<br>
+  &nbsp; <strong>requiere:</strong> { 0 ≤ <i>col1</i> < |<i>A</i>[0]| }<br>
+  &nbsp; <strong>requiere:</strong> { 0 ≤ <i>col2</i> < |<i>A</i>[0]| }<br>
+  &nbsp; <strong>requiere:</strong> { <i>col1</i> ≠ <i>col2</i> }<br>
+  &nbsp; <strong>modifica:</strong> { <i>A</i> }<br>
+  &nbsp; <strong>asegura:</strong> { <i>A</i> tiene exactamente las mismas dimensiones que <i>A@pre</i> }<br>
+  &nbsp; <strong>asegura:</strong> { A[i][j] = A@pre[i][j] para todo <i>i</i>, <i>j</i> en rango tal que <i>j</i> ≠ <i>col1</i> y <i>j</i> ≠ <i>col2</i> }<br>
+  &nbsp; <strong>asegura:</strong> { A[i][col1] = A@pre[|A|-1-i][col2] para todo <i>i</i> tal que 0 ≤ <i>i</i> < |<i>A</i>| }<br>
+  &nbsp; <strong>asegura:</strong> { A[i][col2] = A@pre[|A|-1-i][col1] para todo <i>i</i> tal que 0 ≤ <i>i</i> < |<i>A</i>| }<br>
+
+  }<br>
+  </p>
+  <pre style="background-color: #f0f0f0; /* Color de fondo del recuadro */
+  padding: 2px; /* Espacio interior */
+  border: 1px solid #ccc; /* Borde del recuadro */
+  border-radius: 5px; /* Bordes redondeados */">
+
+Ejemplo: Si <b>mat = [[1,2,3],[40,50,60], [-7,-8,-9]]</b>, luego de ejecutarse <br> <b>intercambiar_e_invertir_columnas(mat,1,2)</b>
+ debería ocurrir que <b>print(mat)</b> muestre <b>[[1, -9, -8], [40, 60, 50], [-7, 3, 2]]</b>
+  </pre>
+
+  <hr style="width: 100%;">
+  <h3 style="color:#1A5276">Ejercicio 4 [2 puntos]</h3>
+
+
+  <p>Se realizaron dos censos en los cuales se le preguntó a cada persona en que localidad vive. Estos datos fueron almacenados en 
+    dos diccionarios cuyas claves son los nombres de las personas, y sus valores las localidades en las cuales viven.
+    Implementar la función mantuvieron_residencia:</p>
+
+<p> problema mantuvieron_residencia (in <i>censo1</i>: Diccionario⟨String,String⟩, in <i>censo2</i>: Diccionario⟨String,String⟩): Diccionario⟨String,Z⟩ {<br>
+  &nbsp; <strong>requiere:</strong> { Las claves de censo1 son las mismas que las claves de censo2 }<br>
+  &nbsp; <strong>asegura:</strong> { <i>k</i> es clave de <i>res</i> si y sólo si existe alguna clave <i>p</i> en censo1 tal que al obtener su valor tanto en censo1 como en censo2, este es igual a <i>k</i> }<br>
+  &nbsp; <strong>asegura:</strong> { El valor de cada clave de <i>res</i> representa la cantidad de personas que en ambos censos vivía en esa localidad, es decir, que mantuvieron su residencia en la misma localidad entre ambos censos }<br>
+  }<br>
+  </p>
+  <pre style="background-color: #f0f0f0; /* Color de fondo del recuadro */
+  padding: 2px; /* Espacio interior */
+  border: 1px solid #ccc; /* Borde del recuadro */
+  border-radius: 5px; /* Bordes redondeados */">
+
+Ejemplo: <b>mantuvieron_residencia({'Juan': 'Merlo', 'Ana': 'Merlo'}, {'Juan': 'Castelar', 'Ana': 'Merlo'})</b><br>
+debe devolver <b>{'Merlo': 1}</b>
+  </pre>
+
+<hr style="width: 100%;">
+      <h3 style="color:#1A5276">Ejercicio 5 [0,5 puntos]</h3>
+
+      <p>Dada la siguiente especificación y una posible implementación de la misma, conteste marcando la opción
+        correcta.</p>
+
+      <div style="display: flex; width: 100%;">
+        <div style="flex: 1; padding: 20px; border: 1px solid #ccc;">
+          <p> problema sumar_elementos (in <i>s</i>: seq⟨Z⟩): Z {<br>
+            &nbsp; <strong>requiere:</strong> { - }<br>
+            &nbsp; <strong>asegura:</strong> { res es la suma de los elementos de s }<br>
+              }<br>
+          </p>
+        </div>
+        <div style="flex: 1; padding: 20px; border: 1px solid #ccc;">
+          <code>
+  def sumar_elementos(s: list[int]) -> int:<br/>
+  &nbsp; &nbsp;res: int = 0<br/>
+  &nbsp; &nbsp;for i in range(1, len(s)):<br/>
+  &nbsp; &nbsp;  &nbsp; &nbsp;    res += s[i]<br/>
+  &nbsp; &nbsp;return res<br/>
+</code>
+        </div>
+      </div>
+      <p>
+        <input type="radio" name="mchoice_1" id="Aopcion1" value="1" />
+        <label for="Aopcion1">El código es correcto, calcula lo pedido en la especificación para cualquier input</label>
+        <br>
+        <input type="radio" name="mchoice_1" id="Aopcion2" value="2" />
+        <label for="Aopcion2">El código tiene un bug, y si hacemos un test suite que cubra todas las líneas lo
+          detectaremos</label> <br>
+        <input type="radio" name="mchoice_1" id="Aopcion3" value="3" />
+        <label for="Aopcion3">El código tiene un bug, pero es posible hacer un test suite que cubra todas las líneas y
+          no detectar dicho bug</label> <br>
+      </p>
+
+      <hr style="width: 100%;">
+      <h3 style="color:#1A5276">Ejercicio 6 [0,5 puntos]</h3>
+
+      <p>Supongamos que un programa tiene un ciclo que itera sobre todos los elementos de una lista de tamaño n.
+        Si el programa realiza una operación constante dentro de ese ciclo (por ejemplo, incrementa en 1 cada valor de la lista), ¿cómo afecta el tamaño de la lista al número de operaciones?
+      </p>
+
+        <p>
+          <input type="radio" name="mchoice_2" id="Aopcion1_2" value="1" />
+          <label for="Aopcion1_2"> Si la lista tiene más elementos, el número de operaciones aumentará.</label>
+          <br>
+          <input type="radio" name="mchoice_2" id="Aopcion2_2" value="2" />
+          <label for="Aopcion2_2">El número de operaciones no cambia con el tamaño de la lista.</label> <br>
+          <input type="radio" name="mchoice_2" id="Aopcion3_2" value="3" />
+          <label for="Aopcion3_2">El número de operaciones depende del contenido de la lista, no del tamaño.</label> <br>
+        </p>
+
+      <hr style="width: 100%;">
+      <h3 style="color:#1A5276">Adjunta el archivo con tu solución:</h3>
+      <p><b style="color:red">Solo se puede adjuntar 1 archivo de extensión .py. En caso de haber desarrollado tests
+          propios, no deben ser entregados.</b></p>
+
+      <label for="archivo">Seleccionar archivo a enviar:</label>
+      <input type="file" id="archivo" name="archivo" required accept=".py,text/x-python" />
+
+      <input type="submit" value="Enviar" style="background-color: #1A5276; border-radius: 5px;
+                margin-top:10px;padding: 10px 150px;color: #FFFFFF;
+                font-size: 20px;cursor: pointer; width:100%">
+
+    </form>
+  </div>
+<script>
+  function validaciones(event) {
+    // Obtiene todos los inputs tipo radio del formulario
+      const radioGroups = document.querySelectorAll('input[type="radio"]');
+      const groupedByName = {};
+
+      // Agrupar radios por su atributo name
+      radioGroups.forEach(radio => {
+        if (!groupedByName[radio.name]) {
+          groupedByName[radio.name] = [];
+        }
+        groupedByName[radio.name].push(radio);
+      });
+
+      // Verificar que cada grupo de radios tenga al menos uno seleccionado
+      for (const groupName in groupedByName) {
+        const radios = groupedByName[groupName];
+        const isChecked = radios.some(radio => radio.checked);
+
+        if (!isChecked) {
+          alert(`Debes seleccionar una opción para la pregunta ${groupName}`);
+          return false; // Detener la validación si falta alguna opción
+        }
+      }
+
+      var confirmacion = confirm("Confirmo que revisé mis respuestas y que quiero entregar mi examen");
+      if (!confirmacion) {
+          event.preventDefault();
+          event.returnValue = false;
+          return false;
+        }
+        event.returnValue = true;
+        return true;
+    }
+
+// registro una funcion para mostrar el archivo cuando se adjunta.
+// de esa forma evitamos que se adjunten otros archivos por error
+document
+  .getElementById('archivo')
+  .addEventListener(
+      'change',
+      function () {
+          var fr = new FileReader();
+          fr.onload = function () {
+              alert(this.result);
+          };
+          fr.readAsText(this.files[0]);
+      }
+  );
+
+// para forzar a bajar el template de pytest y que no se pueda abrir en un nuevo tab
+// (el browser intenta mostrar el codigo como HTML y el formato se ve raro)
+function forceDownload(url, filename) {
+  fetch(url).then(function(t) {
+    return t.blob().then((b) => {
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(b);
+      a.setAttribute("download", filename);
+      a.click();
+    });
+  });
+}
+</script>
+</body>
+
+</html>
+
+<h2>Solucion entregada por el alumno</h2>
+<pre><code>from queue import Queue as Cola
+# Parcial Victoria Ferrario 1C2025
+
+# Ejercicio 1
+def cantidad_parejas_que_suman(s: list[int], n: int) -&gt; int:
+    tuplas_lista:list[tuple[int,int]] = generar_tuplas_posibles(s)
+    res:list[tuple[int,int]] = []
+    for (x,y) in tuplas_lista: 
+        #sumo ambas componentes de las tuplas posibles si da n agrego a res
+        if x+y == n :
+            # podría generar un contador alternativamente
+            res.append((x,y))
+    return len(res)
+
+# AUX: dada una lista, genera todas las tuplas posibles
+def generar_tuplas_posibles(s: list[int]) -&gt; list[tuple[int,int]]:
+    res:list[tuple[int,int]] =[]
+    copia:list[int] = s.copy()
+    for i in range(len(s)):
+        primer_el:int = copia.pop(0)
+        for n in copia:
+            res.append((primer_el, n))
+    return res
+
+
+# Ejercicio 2 
+def pasar_por_autoservicio(clientes: Cola[tuple[str, str, int]]) -&gt; str:
+    copia_clientes_esperando: Cola[tuple[str, str, int]] = Cola()
+    ya_paso: bool = False
+    nombre_cliente_paso: str = &quot;aquí va el nombre&quot;
+
+    while not clientes.empty():
+        cliente: tuple[str, str, int] = clientes.get()
+        if cliente[1] != &quot;efectivo&quot; and cliente[2] &lt;= 15 and ya_paso == False and cliente[2] &gt; 0: 
+            ya_paso = True 
+            nombre_cliente_paso = cliente[0]
+        else: 
+            copia_clientes_esperando.put(cliente)
+
+    # Restauro Cola sin el primer cliente que cumple las condiciones
+    while not copia_clientes_esperando.empty():
+        quedo: tuple[str,str,int] = copia_clientes_esperando.get()
+        clientes.put(quedo)
+
+    return nombre_cliente_paso
+
+
+# Ejercicio 3 
+def intercambiar_e_invertir_columnas(A: list[list[int]], col1: int, col2: int) -&gt; None:
+    # Para manejarme con más facilidad traspongo la matriz
+    #  trabajo con filas, no con columnas, y cuando la cambio por la original
+    #  la traspongo devuelta ;)
+
+    matriz_t: list[list[int]] = trasponer_m(A)
+    matriz_t = invertir_fila(matriz_t, col1)
+    matriz_t = invertir_fila(matriz_t, col2)
+
+    columna_cambiar1 = matriz_t[col1]
+    columna_cambiar2 = matriz_t[col2]
+
+    for i in range(len(matriz_t)):
+        if i == col1 :
+            matriz_t[i] = columna_cambiar2
+        elif i == col2: 
+            matriz_t[i] = columna_cambiar1
+
+    # Al ser inout devuelvo el resultado cambiando el paramentro de entrada
+    final = trasponer_m(matriz_t)
+    for i in range(len(A)): 
+        A[i] = final[i]
+
+#AUX: cambia las columnas por filas
+def trasponer_m(A: list[list[int]]) -&gt; list[list[int]]:
+    B: list[list[int]] = []
+    for i in range(len(A[0])):
+        fila_nueva: list[int] = []
+        for fila in A:
+            fila_nueva.append(fila[i])
+        B.append(fila_nueva)
+    return B 
+#AUX: invierte el orden de los elementos en una fila n-esima
+def invertir_fila(A: list[list[int]], n:int) -&gt; list[list[int]]:
+    res: list[list[int]] = []
+    for i in range(len(A)):
+        if i == n:
+            res.append(invertir_lista(A[i]))
+        else: res.append(A[i])
+    return res
+#AUX: invierte el orden de una lista
+def invertir_lista(s: list[int]) -&gt; list[int]:
+    res: list[int] = []
+    for i in range(len(s)-1,-1,-1):
+        res.append(s[i])
+    return res
+
+
+# Ejercicio 4
+# precond: las claves de censo1 = censo2 -&gt; ambos misma len
+def mantuvieron_residencia(censo1: dict[str, str], censo2: dict[str, str]) -&gt; dict[str, int]:
+    localidades_cant: dict[str, int] = {}
+    for nombre in censo1.keys():
+        if censo1[nombre] == censo2[nombre]:
+            if censo1[nombre] not in localidades_cant.keys():
+                localidades_cant[censo1[nombre]] = 1
+            else: localidades_cant[censo1[nombre]] += 1
+    return localidades_cant
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</code></pre>
+<h2>Resultado de la compilacion</h2>
+<pre><code>
+</code></pre>
+<h2>Ejecucion de los tests</h2>
+<h3>tema2-test-ej1.py.compilacion.out</h3>
+<p>Puntaje del ej: 2 / 2</p>
+<pre><code>test_lista_vacia_devuelve_cero (__main__.Ej1Test.test_lista_vacia_devuelve_cero) ... ok
+test_no_hay_parejas (__main__.Ej1Test.test_no_hay_parejas) ... ok
+test_no_hay_parejas_con_si_mismo (__main__.Ej1Test.test_no_hay_parejas_con_si_mismo) ... ok
+test_parejas_con_numeros_negativos (__main__.Ej1Test.test_parejas_con_numeros_negativos) ... ok
+test_parejas_repetidas_cuenta_todas (__main__.Ej1Test.test_parejas_repetidas_cuenta_todas) ... ok
+test_parejas_suman_valores_varios (__main__.Ej1Test.test_parejas_suman_valores_varios) ... ok
+test_suman_cero (__main__.Ej1Test.test_suman_cero) ... ok
+test_todos_forman_pareja (__main__.Ej1Test.test_todos_forman_pareja) ... ok
+test_todos_negativos (__main__.Ej1Test.test_todos_negativos) ... ok
+test_un_elemento_no_puede_formar_pareja (__main__.Ej1Test.test_un_elemento_no_puede_formar_pareja) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.005s
+
+OK
+
+</code></pre>
+<h3>tema2-test-ej2.py.compilacion.out</h3>
+<p>Puntaje del ej: 2.5 / 2.5</p>
+<pre><code>test_cliente_al_final_de_la_cola_se_retira (__main__.Ej2Test.test_cliente_al_final_de_la_cola_se_retira) ... ok
+test_cliente_al_inicio_de_la_cola_se_retira (__main__.Ej2Test.test_cliente_al_inicio_de_la_cola_se_retira) ... ok
+test_cliente_al_medio_de_la_cola_se_retira (__main__.Ej2Test.test_cliente_al_medio_de_la_cola_se_retira) ... ok
+test_cliente_al_medio_de_la_cola_se_retira_y_el_resto_quedan (__main__.Ej2Test.test_cliente_al_medio_de_la_cola_se_retira_y_el_resto_quedan) ... ok
+test_selecciona_al_primer_cliente_con_todos_candidatos (__main__.Ej2Test.test_selecciona_al_primer_cliente_con_todos_candidatos) ... ok
+test_selecciona_al_primer_cliente_con_todos_candidatos_y_el_resto_quedan (__main__.Ej2Test.test_selecciona_al_primer_cliente_con_todos_candidatos_y_el_resto_quedan) ... ok
+test_selecciona_al_primer_cliente_con_varios_candidatos (__main__.Ej2Test.test_selecciona_al_primer_cliente_con_varios_candidatos) ... ok
+test_selecciona_al_primer_cliente_con_varios_candidatos_y_el_resto_quedan (__main__.Ej2Test.test_selecciona_al_primer_cliente_con_varios_candidatos_y_el_resto_quedan) ... ok
+test_unico_cliente_se_retira (__main__.Ej2Test.test_unico_cliente_se_retira) ... ok
+test_unico_cliente_se_retira_y_cola_queda_vacia (__main__.Ej2Test.test_unico_cliente_se_retira_y_cola_queda_vacia) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.008s
+
+OK
+
+</code></pre>
+<h3>tema2-test-ej3.py.compilacion.out</h3>
+<p>Puntaje del ej: 2.5 / 2.5</p>
+<pre><code>test_intercambiar_e_invertir_columnas_2x3 (__main__.Ej1Test.test_intercambiar_e_invertir_columnas_2x3) ... ok
+test_intercambiar_e_invertir_columnas_3x2 (__main__.Ej1Test.test_intercambiar_e_invertir_columnas_3x2) ... ok
+test_intercambiar_e_invertir_columnas_con_ceros (__main__.Ej1Test.test_intercambiar_e_invertir_columnas_con_ceros) ... ok
+test_intercambiar_e_invertir_columnas_con_negativos (__main__.Ej1Test.test_intercambiar_e_invertir_columnas_con_negativos) ... ok
+test_intercambiar_e_invertir_columnas_en_matriz_1x2 (__main__.Ej1Test.test_intercambiar_e_invertir_columnas_en_matriz_1x2) ... ok
+test_intercambiar_e_invertir_columnas_en_matriz_2x2 (__main__.Ej1Test.test_intercambiar_e_invertir_columnas_en_matriz_2x2) ... ok
+test_intercambiar_e_invertir_columnas_en_matriz_3x10 (__main__.Ej1Test.test_intercambiar_e_invertir_columnas_en_matriz_3x10) ... ok
+test_intercambiar_e_invertir_columnas_en_matriz_3x3 (__main__.Ej1Test.test_intercambiar_e_invertir_columnas_en_matriz_3x3) ... ok
+test_intercambiar_e_invertir_columnas_en_matriz_8x3 (__main__.Ej1Test.test_intercambiar_e_invertir_columnas_en_matriz_8x3) ... ok
+test_intercambiar_e_invertir_columnas_iguales (__main__.Ej1Test.test_intercambiar_e_invertir_columnas_iguales) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.007s
+
+OK
+
+</code></pre>
+<h3>tema2-test-ej4.py.compilacion.out</h3>
+<p>Puntaje del ej: 2 / 2</p>
+<pre><code>test_no_modifica_inputs (__main__.Ej1Test.test_no_modifica_inputs) ... ok
+test_residencia_mantenida_en_una_localidad (__main__.Ej1Test.test_residencia_mantenida_en_una_localidad) ... ok
+test_residencia_mantenida_en_varias_localidades (__main__.Ej1Test.test_residencia_mantenida_en_varias_localidades) ... ok
+test_residencias_cruzadas_no_mantenidas (__main__.Ej1Test.test_residencias_cruzadas_no_mantenidas) ... ok
+test_sin_habitantes (__main__.Ej1Test.test_sin_habitantes) ... ok
+test_sin_residencia_mantenida (__main__.Ej1Test.test_sin_residencia_mantenida) ... ok
+test_todos_mantienen_residencia (__main__.Ej1Test.test_todos_mantienen_residencia) ... ok
+test_todos_se_mudan (__main__.Ej1Test.test_todos_se_mudan) ... ok
+test_una_sola_persona_mantiene (__main__.Ej1Test.test_una_sola_persona_mantiene) ... ok
+test_una_sola_persona_se_muda (__main__.Ej1Test.test_una_sola_persona_se_muda) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.006s
+
+OK
+
+</code></pre>
+<h3>mchoice.json-ej5.compilacion.out</h3>
+<p>Puntaje del ej: 0.5 / 0.5</p>
+<pre><code>mchoice ej5: respuesta del alumno=3, respuesta correcta=3
+
+Ran 1 test in 0 seconds
+
+OK
+
+</code></pre>
+<h3>mchoice.json-ej6.compilacion.out</h3>
+<p>Puntaje del ej: 0.5 / 0.5</p>
+<pre><code>mchoice ej6: respuesta del alumno=1, respuesta correcta=1
+
+Ran 1 test in 0 seconds
+
+OK
+
+</code></pre>
+<p>FIN</p>
